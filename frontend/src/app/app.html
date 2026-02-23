@@ -1,7 +1,30 @@
-<h1>Lista de Tareas</h1>
+<div class="container">
 
-<ul>
-  <li *ngFor="let task of tasks">
-    {{ task.title }} - {{ task.isCompleted }}
-  </li>
-</ul>
+  <h2>Lista de Tareas</h2>
+
+  <div class="form-card">
+    <input type="text" placeholder="Título" [(ngModel)]="newTask.title">
+    <input type="text" placeholder="Descripción" [(ngModel)]="newTask.description">
+    <button (click)="addTask()">Guardar</button>
+  </div>
+
+  <div class="task-list">
+    <div class="task-item" *ngFor="let task of tasks">
+
+      <input type="checkbox"
+             [checked]="task.isCompleted"
+             (change)="toggleComplete(task)">
+
+      <span [class.completed]="task.isCompleted">
+        {{ task.title }}
+      </span>
+
+      <div class="actions">
+        <button (click)="editTask(task)">✏</button>
+        <button (click)="deleteTask(task.id)">🗑</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
