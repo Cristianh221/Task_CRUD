@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TaskApi.Data;
 using TaskApi.Models;
+using TaskApi.Services;
 
 namespace TaskApi.Controllers
 {
@@ -9,51 +8,54 @@ namespace TaskApi.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
-        private readonly TaskDbContext _context;
+        private readonly ITaskService _taskService;
 
-        public TasksController(TaskDbContext context)
+        public TasksController(ITaskService taskService)
         {
-            _context = context;
+            _taskService = taskService;
         }
 
         // GET: api/tasks
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskItem>>> GetTasks()
         {
-            return await _context.Tasks.ToListAsync();
+            var tasks = await _taskService.GetAllAsync();
+            return Ok(tasks);
         }
 
         // GET: api/tasks/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TaskItem>> GetTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await _taskService.GetByIdAsync(id);
 
             if (task == null)
                 return NotFound();
 
-            return task;
+            return Ok(task);
         }
 
         // POST: api/tasks
         [HttpPost]
         public async Task<ActionResult<TaskItem>> CreateTask(TaskItem task)
         {
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
+            var createdTask = await _taskService.CreateAsync(task);
 
-            return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
+            return CreatedAtAction(
+                nameof(GetTask),
+                new { id = createdTask.Id },
+                createdTask
+            );
         }
 
         // PUT: api/tasks/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTask(int id, TaskItem task)
         {
-            if (id != task.Id)
-                return BadRequest();
+            var updated = await _taskService.UpdateAsync(id, task);
 
-            _context.Entry(task).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            if (!updated)
+                return BadRequest();
 
             return NoContent();
         }
@@ -62,13 +64,10 @@ namespace TaskApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var deleted = await _taskService.DeleteAsync(id);
 
-            if (task == null)
+            if (!deleted)
                 return NotFound();
-
-            _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }

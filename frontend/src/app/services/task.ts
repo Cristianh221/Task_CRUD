@@ -3,5 +3,6 @@ export interface Task {
   title: string;
   description: string;
   isCompleted: boolean;
-  createdAt?: string | Date;
+  createdAt: string | null;
+  dueDate: string | null;
 }

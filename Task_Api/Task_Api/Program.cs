@@ -1,7 +1,7 @@
 
 using TaskApi.Data;
 using Microsoft.EntityFrameworkCore;
-
+using TaskApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
@@ -21,6 +21,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddDbContext<TaskDbContext>(options =>
     options.UseInMemoryDatabase("TaskDb"));
+
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

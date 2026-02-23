@@ -44,9 +44,9 @@ frontend/        → Frontend (Angular)
 
 2. Ejecutar: dotnet run
 
-3. El backend se ejecutará en: https://localhost:7007
+3. El backend se ejecutará en: https://localhost:5287
 
-4. Swagger estará disponible en: https://localhost:7007/swagger
+4. Swagger estará disponible en: https://localhost:5287/swagger
 
 
 # 2. Ejecutar el Frontend (Angular)

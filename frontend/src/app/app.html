@@ -5,15 +5,20 @@
 
   <div class="form-section">
     <div class="form-card">
-      <input type="text" placeholder="Título de la tarea" [(ngModel)]="newTask.title">
-      <input type="text" placeholder="Añade una descripción..." [(ngModel)]="newTask.description">
+      <input type="text" class="form-input" placeholder="Título de la tarea" [(ngModel)]="newTask.title">
+      <input type="text" class="form-input" placeholder="Añade una descripción..." [(ngModel)]="newTask.description">
+
+      <div class="date-group">
+        <label for="date">Fecha:</label>
+        <input type="datetime-local" class="form-input" [(ngModel)]="newTask.createdAt">
+      </div>
+
       <button (click)="addTask()" [class.btn-update]="newTask.id !== 0">
         {{ newTask.id === 0 ? 'Añadir Tarea' : 'Guardar Cambios' }}
       </button>
       <button *ngIf="newTask.id !== 0" (click)="resetForm()" class="btn-cancel">Cancelar</button>
     </div>
   </div>
-
   <hr class="separator">
 
   <div class="tasks-grid">
