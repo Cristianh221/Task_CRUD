@@ -1,25 +1,104 @@
-# Gestión de Tareas - Prueba Técnica
+# Gestión de Tareas – Prueba Técnica (Angular + .NET)
 
-Aplicación Fullstack (CRUD) para administrar tareas, desarrollada con .NET Web API y Angular.
+# Objetivo
+Desarrollar una aplicación web que permita administrar tareas demostrando:
+- Implementación completa de CRUD (Crear, Leer, Actualizar, Eliminar)
+- Comunicación cliente-servidor mediante API REST
+- Uso de Entity Framework Core
+- Consumo de API con HttpClient en Angular
+- Organización y buenas prácticas de desarrollo
 
-##  Requisitos Funcionales Implementados
-- [x] [cite_start]Listar todas las tareas[cite: 6].
-- [x] [cite_start]Crear nuevas tareas[cite: 7].
-- [x] [cite_start]Editar tareas existentes[cite: 8].
-- [x] [cite_start]Eliminar tareas[cite: 9].
-- [x] [cite_start]Cambiar estado (Completada/Pendiente)[cite: 10].
+# Funcionalidades Implementadas
+- ✔ Listar todas las tareas  
+- ✔ Crear nuevas tareas  
+- ✔ Editar tareas existentes  
+- ✔ Eliminar tareas  
+- ✔ Marcar tareas como completadas o pendientes  
+- ✔ Interfaz visual clara y funcional  
 
-## Tecnologías
-- [cite_start]**Backend:** .NET Web API con Entity Framework Core y Base de datos en memoria (InMemory)[cite: 18, 20, 21].
-- [cite_start]**Frontend:** Angular con HttpClient para consumo de API REST[cite: 24, 29].
+# Tecnologías Utilizadas
 
-## Instrucciones de Ejecución
+# Backend
+- .NET 8 Web API
+- Entity Framework Core
+- Base de datos en memoria (InMemory)
+- Swagger (documentación y pruebas)
 
-### Backend (.NET)
-1. Abrir la carpeta `Task_Api`.
-2. Ejecutar `dotnet run` en la terminal.
+# Frontend
+- Angular
+- HttpClient
+- FormsModule (Two-way data binding)
+- Standalone Components
 
-### Frontend (Angular)
-1. Abrir la carpeta del proyecto Angular.
-2. Ejecutar `npm install` para las dependencias.
-3. Ejecutar `ng serve` y abrir `http://localhost:4200`.
+# Estructura del Proyecto
+
+Task_CRUD/
+Task_Api/        → Backend (.NET Web API)
+frontend/        → Frontend (Angular)
+
+# Instrucciones de Ejecución
+
+# 1. Ejecutar el Backend (.NET)
+
+1. Abrir una terminal en la carpeta: Task_Api
+
+2. Ejecutar: dotnet run
+
+3. El backend se ejecutará en: https://localhost:7007
+
+4. Swagger estará disponible en: https://localhost:7007/swagger
+
+
+# 2. Ejecutar el Frontend (Angular)
+
+1. Abrir una nueva terminal en la carpeta: frontend
+
+2. Instalar dependencias: npm install
+
+3. Ejecutar la aplicación:ng serve
+
+4. Abrir en el navegador:http://localhost:4200
+
+
+# Comunicación Frontend - Backend
+
+El frontend consume la API mediante: https://localhost:7007/api/Tasks
+
+Se encuentra habilitado CORS para permitir conexión desde: http://localhost:4200
+
+# Base de Datos
+
+Se utiliza una base de datos en memoria (InMemory).
+
+Los datos se pierden al reiniciar el backend.
+
+# Endpoints Principales
+
+| Método | Endpoint        | Descripción          |
+|--------|-----------------|----------------------|
+| GET    | /api/Tasks      | Listar tareas        |
+| GET    | /api/Tasks/{id} | Obtener tarea por ID |
+| POST   | /api/Tasks      | Crear tarea          |
+| PUT    | /api/Tasks/{id} | Actualizar tarea     |
+| DELETE | /api/Tasks/{id} | Eliminar tarea       |
+
+
+# Requisitos Previos
+
+- .NET SDK 8 o superior
+- Node.js 18 o superior
+- Angular CLI
+
+# Buenas Prácticas Aplicadas
+
+- Separación de responsabilidades
+- Código organizado por capas
+- Servicios para consumo de API
+- Manejo de estado en Angular
+- Estructura clara del repositorio
+- Implementación completa de CRUD
+
+# Desarrollado por
+Cristian Hernández
+
+Proyecto desarrollado como prueba técnica Fullstack (Angular + .NET).
