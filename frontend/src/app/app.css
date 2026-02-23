@@ -1,53 +1,222 @@
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  font-family: Arial, sans-serif;
+/* =========================================
+   CONFIGURACIÓN GLOBAL Y VARIABLES
+   ========================================= */
+:root {
+    --primary: #1976d2;
+    --success: #2e7d32;
+    --danger: #d32f2f;
+    --bg: #f5f7fa;
+    --white: #ffffff;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  text-align: center;
+body {
+    background-color: var(--bg);
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Título con degradado y animación */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #1e272e 0%, #007bff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   FORMULARIO DE TAREAS
+   ========================================= */
+.form-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
 }
 
 .form-card {
-  background: #f4f4f4;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .form-card input {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
 }
 
-.form-card button {
-  width: 100%;
-  padding: 8px;
-  background: #1976d2;
-  color: white;
-  border: none;
-  cursor: pointer;
+.form-card input:focus {
+    border-color: var(--primary);
 }
 
-.task-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: white;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Estilos de botones del formulario */
+.form-card button,
+div.form-section .form-card button {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 14px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    display: block !important;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2) !important;
+    transition: all 0.2s ease-in-out !important;
 }
 
-.completed {
-  text-decoration: line-through;
-  color: gray;
+.form-card button:hover {
+    background-color: #0056b3 !important;
+    transform: translateY(-1px);
+}
+
+.form-card button.btn-update {
+    background-color: #28a745 !important;
+    box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2) !important;
+}
+
+.form-card button.btn-cancel {
+    background-color: #6c757d !important;
+    color: var(--white) !important;
+    margin-top: 5px;
+}
+
+/* =========================================
+   GRID Y TARJETAS DE TAREAS
+   ========================================= */
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.task-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+    justify-content: space-between;
+    border-top: 5px solid var(--primary);
+    transition: all 0.3s ease;
+}
+.task-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: rgba(25, 118, 210, 0.2);
+}
+
+
+
+.completed-card {
+    border-top-color: var(--success);
+    background-color: #f8fff8;
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.completed-text {
+    text-decoration: line-through;
+    color: #adb5bd;
+}
+
+.card-body p {
+    color: #555;
+    font-size: 0.95rem;
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.task-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Botones de acción (Editar/Eliminar) */
+.actions {
+    display: flex;
+    gap: 10px;
 }
 
 .actions button {
-  margin-left: 5px;
-  border: none;
-  cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #e3f2fd;
+    color: var(--primary);
+}
+
+.delete-btn {
+    background-color: #ffebee;
+    color: var(--danger);
+}
+
+.edit-btn:hover {
+    background-color: #bbdefb;
+}
+
+.delete-btn:hover {
+    background-color: #ffcdd2;
 }

@@ -1,30 +1,43 @@
 <div class="container">
+  <header>
+    <h1>Gestión de Tareas</h1>
+  </header>
 
-  <h2>Lista de Tareas</h2>
-
-  <div class="form-card">
-    <input type="text" placeholder="Título" [(ngModel)]="newTask.title">
-    <input type="text" placeholder="Descripción" [(ngModel)]="newTask.description">
-    <button (click)="addTask()">Guardar</button>
+  <div class="form-section">
+    <div class="form-card">
+      <input type="text" placeholder="Título de la tarea" [(ngModel)]="newTask.title">
+      <input type="text" placeholder="Añade una descripción..." [(ngModel)]="newTask.description">
+      <button (click)="addTask()" [class.btn-update]="newTask.id !== 0">
+        {{ newTask.id === 0 ? 'Añadir Tarea' : 'Guardar Cambios' }}
+      </button>
+      <button *ngIf="newTask.id !== 0" (click)="resetForm()" class="btn-cancel">Cancelar</button>
+    </div>
   </div>
 
-  <div class="task-list">
-    <div class="task-item" *ngFor="let task of tasks">
+  <hr class="separator">
 
-      <input type="checkbox"
-             [checked]="task.isCompleted"
-             (change)="toggleComplete(task)">
+  <div class="tasks-grid">
+    <div class="task-card" *ngFor="let task of tasks" [class.completed-card]="task.isCompleted">
 
-      <span [class.completed]="task.isCompleted">
-        {{ task.title }}
-      </span>
+      <div class="card-header">
+        <input type="checkbox" [checked]="task.isCompleted" (change)="toggleComplete(task)">
+        <h3 [class.completed-text]="task.isCompleted">{{ task.title }}</h3>
+      </div>
 
-      <div class="actions">
-        <button (click)="editTask(task)">✏</button>
-        <button (click)="deleteTask(task.id)">🗑</button>
+      <div class="card-body">
+        <p>{{ task.description }}</p>
+      </div>
+
+      <div class="card-footer">
+        <span class="task-date">
+          📅 {{ task.createdAt | date:'medium' }}
+        </span>
+        <div class="actions">
+          <button class="edit-btn" (click)="editTask(task)">Edit</button>
+          <button class="delete-btn" (click)="deleteTask(task.id)">Del</button>
+        </div>
       </div>
 
     </div>
   </div>
-
 </div>
